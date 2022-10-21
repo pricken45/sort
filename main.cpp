@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <cstring>
 
 int main()
 {
@@ -14,11 +15,18 @@ int main()
     inputFile >> numberString;
     std::cout << "File content: " << numberString << std::endl;
 
+    std::cout << numberString.length() << std::endl;
+    char * cstr = new char [numberString.length()+1];
+    std::strcpy (cstr, numberString.c_str());
+    std::cout<<"cstr: " << cstr << std::endl;
     std::vector<int> numberVector;
     for (int i = 0; i < numberString.length(); i++) {
-        numberVector.push_back((int)(numberString.c_str()[i]));
+        //numberVector.push_back(atoi(cstr[i]));
+        //std::cout << numberVector[i];
+        std::cout
+        //std::cout << numberString.c_str()[i];
     }
-    std::cout << numberVector.data();
+    //std::cout << numberVector.data();
     std::vector<int> nC = numberVector;
     int b = nC.size();
     int a[b];
