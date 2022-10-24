@@ -7,13 +7,38 @@
 #include <vector>
 #include <cstring>
 
+std::vector<std::string> split (std::string s, std::string delimiter) {
+    size_t pos_start = 0, pos_end, delim_len = delimiter.length();
+    std::string token;
+    std::vector<std::string> res;
+
+    while ((pos_end = s.find (delimiter, pos_start)) != std::string::npos) {
+        token = s.substr (pos_start, pos_end - pos_start);
+        pos_start = pos_end + delim_len;
+        res.push_back (token);
+    }
+
+    res.push_back (s.substr (pos_start));
+    return res;
+}
+
+
+
 int main()
 {
     std::ifstream inputFile("numbers.txt");
     std::string numberString = "";
 
-    inputFile >> numberString;
-    std::cout << "File content: " << numberString << std::endl;
+    
+    while (1) {
+        char c;
+        c = inputFile.get();
+        if (inputFile.eof())
+            break;
+        numberString += c;
+    }
+    
+
 
     std::cout << numberString.length() << std::endl;
     char * cstr = new char [numberString.length()+1];
@@ -23,7 +48,7 @@ int main()
     for (int i = 0; i < numberString.length(); i++) {
         //numberVector.push_back(atoi(cstr[i]));
         //std::cout << numberVector[i];
-        std::cout
+        
         //std::cout << numberString.c_str()[i];
     }
     //std::cout << numberVector.data();
@@ -65,5 +90,7 @@ int main()
     char ch;
     
     std::cin >> ch;
+
+    inputFile.close();
 }
 
