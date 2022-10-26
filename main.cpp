@@ -23,12 +23,21 @@ std::vector<std::string> split (std::string s, std::string delimiter) {
 }
 
 
-
-int main()
+int main(int argc, char **argv)
 {
-    std::ifstream inputFile("numbers.txt");
-    std::string numberString = "";
+    if (!(argc > 1)) {
+        std::cout << "No provided input file. Closing program...\n";
+        std::cout << "Usage: ./sort <input file> <output file (optional)> \n";
+        return 0;
+    }
+    std::ifstream inputFile(argv[1]);
+    if (!inputFile.good()) {
+        std::cout << "Provided input file was not found. Closing program...\n";
+        std::cout << "Usage: ./sort <input file> <output file (optional)> \n";
 
+        return 0;
+    }
+    std::string numberString = "";
     
     while (1) {
         char c;
@@ -38,33 +47,18 @@ int main()
         numberString += c;
     }
     
+    std::vector<std::string> splittedString = split(numberString, "\n");
 
-
-    std::cout << numberString.length() << std::endl;
-    char * cstr = new char [numberString.length()+1];
-    std::strcpy (cstr, numberString.c_str());
-    std::cout<<"cstr: " << cstr << std::endl;
     std::vector<int> numberVector;
-    for (int i = 0; i < numberString.length(); i++) {
-        //numberVector.push_back(atoi(cstr[i]));
-        //std::cout << numberVector[i];
-        
-        //std::cout << numberString.c_str()[i];
+    for (int i = 0; i < splittedString.size(); i++) {
+        numberVector.push_back(std::stoi(splittedString[i]));
     }
-    //std::cout << numberVector.data();
-    std::vector<int> nC = numberVector;
-    int b = nC.size();
-    int a[b];
-    for (int i = 0; i < nC.size(); i++)
-    {
-        a[i] = nC[i];
-    }
+    //std::cout << numberVector.data() 
+    std::vector<int> numbers = numberVector;
 
-    int numbers[] = {0,4,3,5,3,5,3};
     int swaps = 1;
     int iterations = 0;
-
-    int len = sizeof(numbers) / sizeof(numbers[0]);
+    int len = numberVector.size();
     
     while (swaps != 0) {
         swaps = 0;
@@ -85,12 +79,20 @@ int main()
     for (auto l : numbers) {
         numbersS += std::to_string(l) + "\n";
     }
-    std::cout << numbersS;
-    std::cout << "This took " << iterations << " iterations";
-    char ch;
+    std::cout << "Sorting took " << iterations << " iterations\n";
+    if (argc > 2) {
+        std::cout << "Writing to file " << argv[2] << "...\n";
+        std::ofstream outputfile(argv[2]);
+        outputfile << numbersS;
+        outputfile.close();
+    } else {
+        std::cout << "No output file was provided. Writing to default out.txt\n";
+        std::ofstream outputfile("out.txt");
+        outputfile << numbersS;
+        outputfile.close();
+    }
     
-    std::cin >> ch;
-
     inputFile.close();
+    return 0;
 }
 

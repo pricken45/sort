@@ -1,3 +1,3 @@
 default:
-	g++ main.cpp -o app
-	./app
+	g++ main.cpp -o sort
+	./sort
