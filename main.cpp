@@ -64,6 +64,7 @@ int main(int argc, char **argv)
         swaps = 0;
         iterations++;
         for (int i = 0; i < len - 1; i++) {
+            std::cout << "sorting: " << numbers[i] << ", " << numbers[i+1] << "...\n";
             if (numbers[i] > numbers[i + 1]) {
                 swaps += 1;
                 int t1 = numbers[i];
@@ -95,4 +96,3 @@ int main(int argc, char **argv)
     inputFile.close();
     return 0;
 }
-
