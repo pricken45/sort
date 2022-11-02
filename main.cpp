@@ -54,23 +54,24 @@ int main(int argc, char **argv)
         numberVector.push_back(std::stoi(splittedString[i]));
     }
     //std::cout << numberVector.data() 
-    std::vector<int> numbers = numberVector;
+    std::vector<int>& numbers = numberVector;
 
     int swaps = 1;
     int iterations = 0;
-    int len = numberVector.size();
+    int len = numberVector.size() - 1;
     
     while (swaps != 0) {
         swaps = 0;
         iterations++;
-        for (int i = 0; i < len - 1; i++) {
-            std::cout << "sorting: " << numbers[i] << ", " << numbers[i+1] << "...\n";
+        for (int i = 0; i < len; i++) {
+            //std::cout << "sorting: " << numbers[i] << ", " << numbers[i+1] << "...\n";
             if (numbers[i] > numbers[i + 1]) {
                 swaps += 1;
                 int t1 = numbers[i];
                 int t2 = numbers[i + 1];
                 numbers[i] = t2;
                 numbers[i + 1] = t1;
+                
             }
         }
     }
