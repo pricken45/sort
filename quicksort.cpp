@@ -61,13 +61,13 @@ int main(int argc, char **argv)
 {
     auto start = std::chrono::system_clock::now();
     if (!(argc > 1)) {
-        std::cout << "No provided input file. Closing program...\n";
+        std::cout << "Error: No provided input file. Closing program...\n";
         std::cout << "Usage: ./sort <input file> <output file (optional)> \n";
         return 0;
     }
     std::ifstream inputFile(argv[1]);
     if (!inputFile.good()) {
-        std::cout << "Provided input file was not found. Closing program...\n";
+        std::cout << "Error: Provided input file was not found. Closing program...\n";
         std::cout << "Usage: ./sort <input file> <output file (optional)> \n";
 
         return 0;

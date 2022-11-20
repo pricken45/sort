@@ -49,5 +49,6 @@
         "chrono": "cpp",
         "ctime": "cpp",
         "ratio": "cpp"
-    }
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
 }
